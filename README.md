@@ -73,6 +73,7 @@ Object customizations
 - ~~Custom object dashboards~~
 - ~~Disallowing object delete~~
 - ~~Setting a custom order on an object list~~
+- [Allowing sortable on an object list](#allowing-sortable-on-an-object-list)
 
 Theme customizations:
 
@@ -136,6 +137,42 @@ charcoal-app makes routing easy through a configuration file. The admin routes a
 	}
 }
 ```
+
+[☝ Recipes menu](#recipes)
+
+## Allowing sortable on an object list
+
+By default, it is not possible to reorder objects directly from the object table widget.
+
+It is, however, really easy to enable this feature from the object's admin metadata. This is done by setting `"sortable":true` on the `charcoal/admin/widget` options:
+
+```json
+{
+	"admin":{
+		...
+		"dashboards":{
+			...
+			"table":{
+				"widgets": {
+					"table": {
+						"type": "charcoal/admin/widget/table",
+						"collection_ident": "default",
+						"obj_type": "foo/object/bar",
+						"sortable":true
+					}
+				}
+			}
+		}
+		"default_collection_dashboard":"table"
+		...
+	}
+}
+
+```
+
+> Note that the object (in this example, `foo/object/bar`) must have a `position` property.
+
+> Also note that the frontend should probably order by `position` for this feature to make any sense.
 
 [☝ Recipes menu](#recipes)
 
